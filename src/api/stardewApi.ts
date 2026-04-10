@@ -9,9 +9,8 @@ import type {
   Season,
   Villager,
 } from '../types/stardew'
-import { fetchJson } from './client'
 
-const API_BASE_URL = 'http://localhost:3000/api/v1'
+import { API_BASE_URL, fetchJson } from './client'
 
 export async function getCrops(): Promise<Crop[]> {
   const response = await fetchJson<ApiResponse<Crop[]>>('/crops')
