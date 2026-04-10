@@ -1,0 +1,68 @@
+import type { Crop } from '../types/stardew'
+
+export const crops: Crop[] = [
+  {
+    id: 'parsnip',
+    name: 'Parsnip',
+    season: ['spring'],
+    growthDays: 4,
+    sellPrice: 35,
+    regrowthDays: null,
+  },
+  {
+    id: 'cauliflower',
+    name: 'Cauliflower',
+    season: ['spring'],
+    growthDays: 12,
+    sellPrice: 175,
+    regrowthDays: null,
+  },
+  {
+    id: 'potato',
+    name: 'Potato',
+    season: ['spring'],
+    growthDays: 6,
+    sellPrice: 80,
+    regrowthDays: null,
+  },
+  {
+    id: 'blueberry',
+    name: 'Blueberry',
+    season: ['summer'],
+    growthDays: 13,
+    sellPrice: 50,
+    regrowthDays: 4,
+  },
+  {
+    id: 'melon',
+    name: 'Melon',
+    season: ['summer'],
+    growthDays: 12,
+    sellPrice: 250,
+    regrowthDays: null,
+  },
+  {
+    id: 'corn',
+    name: 'Corn',
+    season: ['summer', 'fall'],
+    growthDays: 14,
+    sellPrice: 50,
+    regrowthDays: 4,
+  },
+  {
+    id: 'pumpkin',
+    name: 'Pumpkin',
+    season: ['fall'],
+    growthDays: 13,
+    sellPrice: 320,
+    regrowthDays: null,
+  },
+  {
+    id: 'cranberries',
+    name: 'Cranberries',
+    season: ['fall'],
+    growthDays: 7,
+    sellPrice: 75,
+    regrowthDays: 5,
+  },
+]

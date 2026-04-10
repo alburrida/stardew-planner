@@ -1,0 +1,68 @@
+import type { Fish } from '../types/stardew'
+
+export const fish: Fish[] = [
+  {
+    id: 'sunfish',
+    name: 'Sunfish',
+    season: ['spring', 'summer'],
+    location: 'River',
+    time: '06:00 - 19:00',
+    weather: 'Sunny',
+  },
+  {
+    id: 'catfish',
+    name: 'Catfish',
+    season: ['spring', 'fall'],
+    location: 'River',
+    time: '06:00 - 00:00',
+    weather: 'Rain',
+  },
+  {
+    id: 'sardine',
+    name: 'Sardine',
+    season: ['spring', 'fall', 'winter'],
+    location: 'Ocean',
+    time: '06:00 - 19:00',
+    weather: null,
+  },
+  {
+    id: 'tuna',
+    name: 'Tuna',
+    season: ['summer', 'winter'],
+    location: 'Ocean',
+    time: '06:00 - 19:00',
+    weather: null,
+  },
+  {
+    id: 'sturgeon',
+    name: 'Sturgeon',
+    season: ['summer', 'winter'],
+    location: 'Mountain Lake',
+    time: '06:00 - 19:00',
+    weather: null,
+  },
+  {
+    id: 'walleye',
+    name: 'Walleye',
+    season: ['fall'],
+    location: 'River / Mountain Lake',
+    time: '12:00 - 02:00',
+    weather: 'Rain',
+  },
+  {
+    id: 'super-cucumber',
+    name: 'Super Cucumber',
+    season: ['summer', 'fall'],
+    location: 'Ocean',
+    time: '18:00 - 02:00',
+    weather: null,
+  },
+  {
+    id: 'salmon',
+    name: 'Salmon',
+    season: ['fall'],
+    location: 'River',
+    time: '06:00 - 19:00',
+    weather: null,
+  },
+]
