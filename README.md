@@ -1,73 +1,197 @@
-# React + TypeScript + Vite
+# Stardew Planner
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicación fullstack inspirada en Stardew Valley para consultar información útil del juego y organizar mejor la partida del usuario.
 
-Currently, two official plugins are available:
+La aplicación permite:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- consultar cultivos
+- consultar peces
+- consultar aldeanos
+- guardar favoritos
+- crear y editar notas
+- gestionar tareas en un planner por estación
 
-## React Compiler
+## Tecnologías utilizadas
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Frontend
+- React
+- TypeScript
+- Tailwind CSS
+- Vite
+- React Router
 
-## Expanding the ESLint configuration
+### Backend
+- Node.js
+- Express
+- TypeScript
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Otras herramientas
+- Git y GitHub
+- Trello
+- Vercel
+- Render
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Descripción del proyecto
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Stardew Planner es una aplicación web fullstack diseñada para centralizar información útil de Stardew Valley y añadir herramientas sencillas de organización para el usuario.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+El proyecto combina una parte informativa y una parte interactiva:
+
+### Parte informativa
+- listado de cultivos
+- listado de peces
+- listado de aldeanos
+
+### Parte interactiva
+- sistema de favoritos
+- sistema de notas
+- planner de tareas por estación
+
+La idea del proyecto no ha sido crear una wiki enorme, sino una herramienta práctica, clara y útil para consultar datos rápidos y organizar la partida desde una sola aplicación.
+
+## Funcionalidades principales
+
+La aplicación incluye las siguientes funcionalidades:
+
+- consulta de cultivos con búsqueda y filtro por estación
+- consulta de peces con búsqueda y filtro por estación
+- consulta de aldeanos con búsqueda y filtro por estación
+- sistema de favoritos compartido mediante Context API
+- creación, edición y borrado de notas
+- creación, edición, borrado y marcado de tareas del planner
+- navegación entre páginas con React Router
+- página 404 para rutas no válidas
+- cliente de API tipado en el frontend
+- backend con arquitectura por capas
+
+## Estructura del proyecto
+
+```txt
+stardew-planner/
+  docs/
+  public/
+  src/
+    api/
+    components/
+    context/
+    hooks/
+    pages/
+    types/
+    utils/
+  server/
+    src/
+      config/
+      controllers/
+      data/
+      routes/
+      services/
+      types/
+  README.md
+  ```
+
+### Organización general
+
+- src/ contiene el frontend
+- server/ contiene el backend
+- docs/ contiene la documentación técnica del proyecto
+
+## Instalación y ejecución en local
+
+### Requisitos previos
+
+- Node.js instalado
+- npm disponible
+- Git opcional para clonar el repositorio
+
+### 1. Clonar el repositorio
+
+```bash
+git clone https://github.com/alburrida/stardew-planner
+cd stardew-planner
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2. Instalar dependencias del frontend
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
+
+### 3. Instalar dependencias del backend
+
+```bash
+cd server
+npm install
+cd ..
+```
+
+### 4. Ejecutar el frontend
+
+```bash
+npm run dev
+```
+
+### 5. Ejecutar el backend
+
+```bash
+cd server
+npm run dev
+```
+
+## Despliegue y enlaces del proyecto
+
+El proyecto se ha desplegado separando frontend y backend:
+
+- **Frontend** desplegado en **Vercel**
+- **Backend** desplegado en **Render**
+
+### Enlaces del proyecto
+
+- **Frontend**: `https://stardew-planner-phi.vercel.app`
+- **Backend / API**: `https://stardew-planner.onrender.com`
+
+### Nota importante
+
+La aplicación usa una variable de entorno en el frontend para apuntar a la URL de la API en producción:
+
+```env
+VITE_API_BASE_URL=AQUI_URL_BACKEND/api/v1
+```
+Además, los datos de favoritos, notas y planner se almacenan actualmente en memoria en el backend, por lo que no existe persistencia real si el servicio se reinicia.
+
+## Documentación incluida
+
+La carpeta `docs/` incluye la documentación desarrollada durante el proyecto:
+
+- `agile.md`
+- `idea.md`
+- `project-management.md`
+- `design.md`
+- `componentes.md`
+- `hooks.md`
+- `contexto.md`
+- `routing.md`
+- `forms.md`
+- `api.md`
+- `testing.md`
+- `deployment.md`
+- `retrospective.md`
+
+Estos documentos recogen tanto la planificación inicial como las decisiones técnicas, la arquitectura, la API, las pruebas y la reflexión final del proyecto.
+
+## Fuente de datos e inspiración
+
+La aplicación está inspirada en Stardew Valley y utiliza datos del juego con finalidad académica y demostrativa.
+
+La información mostrada en la aplicación se ha organizado y adaptado al formato del proyecto para construir una herramienta práctica de consulta y organización.
+
+## Estado del proyecto
+
+El proyecto se encuentra funcional y cubre los requisitos principales de la práctica:
+
+- frontend con React, TypeScript y Tailwind CSS
+- backend con Express y TypeScript
+- arquitectura por capas en el backend
+- cliente API tipado en el frontend
+- rutas, contexto, hooks y formularios
+- documentación técnica en `docs/`
+- despliegue del frontend y del backend
