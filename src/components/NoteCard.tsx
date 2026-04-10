@@ -8,15 +8,23 @@ interface NoteCardProps {
 
 function NoteCard({ note, onEdit, onDelete }: NoteCardProps) {
   return (
-    <article className="space-y-4 rounded-xl border border-stone-800 bg-stone-900 p-5">
+    <article
+      className="space-y-4 rounded-2xl border p-5"
+      style={{
+        backgroundColor: 'var(--color-surface)',
+        borderColor: 'var(--color-border)',
+      }}
+    >
       <div>
-        <h2 className="text-xl font-semibold text-emerald-400">{note.title}</h2>
-        <p className="mt-1 text-xs text-stone-500">
+        <h2 className="text-xl font-semibold" style={{ color: 'var(--color-villager)' }}>
+          {note.title}
+        </h2>
+        <p className="mt-1 text-xs" style={{ color: 'var(--color-text-muted)' }}>
           {new Date(note.createdAt).toLocaleString()}
         </p>
       </div>
 
-      <p className="whitespace-pre-line text-sm text-stone-300">
+      <p className="whitespace-pre-line text-sm" style={{ color: 'var(--color-text)' }}>
         {note.content}
       </p>
 
@@ -24,7 +32,8 @@ function NoteCard({ note, onEdit, onDelete }: NoteCardProps) {
         <button
           type="button"
           onClick={() => onEdit(note)}
-          className="rounded-md bg-amber-400 px-4 py-2 text-sm font-medium text-stone-950 transition hover:opacity-90"
+          className="rounded-lg px-4 py-2 text-sm font-medium transition hover:opacity-90"
+          style={{ backgroundColor: 'var(--color-villager)', color: 'var(--color-bg)' }}
         >
           Editar
         </button>
@@ -32,7 +41,8 @@ function NoteCard({ note, onEdit, onDelete }: NoteCardProps) {
         <button
           type="button"
           onClick={() => void onDelete(note.id)}
-          className="rounded-md bg-red-400 px-4 py-2 text-sm font-medium text-stone-950 transition hover:opacity-90"
+          className="rounded-lg px-4 py-2 text-sm font-medium transition hover:opacity-90"
+          style={{ backgroundColor: 'var(--color-danger)', color: 'var(--color-bg)' }}
         >
           Borrar
         </button>

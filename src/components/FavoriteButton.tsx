@@ -8,20 +8,20 @@ interface FavoriteButtonProps {
 
 function FavoriteButton({ itemId, type }: FavoriteButtonProps) {
   const { isFavorite, toggleFavorite } = useFavorites()
-
   const favorite = isFavorite(itemId, type)
 
   return (
     <button
       type="button"
       onClick={() => void toggleFavorite(itemId, type)}
-      className={`rounded-md px-3 py-2 text-sm font-medium transition ${
-        favorite
-          ? 'bg-yellow-400 text-stone-950 hover:opacity-90'
-          : 'bg-stone-800 text-stone-100 hover:bg-stone-700'
-      }`}
+      className="rounded-lg px-3 py-2 text-xs font-semibold transition hover:opacity-90"
+      style={{
+        backgroundColor: favorite ? 'var(--color-villager)' : 'var(--color-bg-secondary)',
+        color: favorite ? 'var(--color-bg)' : 'var(--color-text)',
+        border: '1px solid var(--color-border)',
+      }}
     >
-      {favorite ? 'Quitar de favoritos' : 'Añadir a favoritos'}
+      {favorite ? 'En favoritos' : 'Favorito'}
     </button>
   )
 }

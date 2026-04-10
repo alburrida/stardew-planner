@@ -20,11 +20,8 @@ function CropsPage() {
     const normalizedSearch = search.trim().toLowerCase()
 
     return data.filter((crop) => {
-      const matchesSearch =
-        crop.name.toLowerCase().includes(normalizedSearch)
-
-      const matchesSeason =
-        season === '' || crop.season.includes(season)
+      const matchesSearch = crop.name.toLowerCase().includes(normalizedSearch)
+      const matchesSeason = season === '' || crop.season.includes(season)
 
       return matchesSearch && matchesSeason
     })
@@ -32,10 +29,24 @@ function CropsPage() {
 
   return (
     <section className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold">Cultivos</h1>
-        <p className="mt-2 text-stone-300">
-          Listado de cultivos disponibles en Stardew Valley.
+      <div
+        className="rounded-3xl border p-6"
+        style={{
+          background: 'linear-gradient(135deg, var(--color-bg-secondary), var(--color-surface))',
+          borderColor: 'var(--color-border)',
+        }}
+      >
+        <p
+          className="text-sm font-semibold uppercase tracking-wide"
+          style={{ color: 'var(--color-crop)' }}
+        >
+          Colección
+        </p>
+        <h1 className="mt-2 text-3xl font-bold" style={{ color: 'var(--color-text)' }}>
+          Cultivos
+        </h1>
+        <p className="mt-2" style={{ color: 'var(--color-text-muted)' }}>
+          Consulta cultivos, estaciones, crecimiento y precio de venta.
         </p>
       </div>
 
@@ -47,6 +58,12 @@ function CropsPage() {
         />
         <SeasonFilter value={season} onChange={setSeason} />
       </div>
+
+      {!loading && !error && (
+        <p className="text-sm" style={{ color: 'var(--color-text-muted)' }}>
+          Resultados: {filteredCrops.length}
+        </p>
+      )}
 
       {loading && <LoadingState />}
       {error && <ErrorMessage message={error} onRetry={refetch} />}

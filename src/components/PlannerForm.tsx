@@ -4,11 +4,7 @@ import type { PlannerItem, Season } from '../types/stardew'
 
 interface PlannerFormProps {
   initialItem?: PlannerItem | null
-  onSubmit: (
-    title: string,
-    season: Season,
-    completed: boolean,
-  ) => Promise<void>
+  onSubmit: (title: string, season: Season, completed: boolean) => Promise<void>
   onCancelEdit?: () => void
 }
 
@@ -41,7 +37,6 @@ function PlannerForm({
     try {
       setSubmitting(true)
       setError(null)
-
       await onSubmit(title.trim(), season, completed)
 
       if (!initialItem) {
@@ -50,11 +45,7 @@ function PlannerForm({
         setCompleted(false)
       }
     } catch (err) {
-      if (err instanceof Error) {
-        setError(err.message)
-      } else {
-        setError('Ha ocurrido un error inesperado')
-      }
+      setError(err instanceof Error ? err.message : 'Ha ocurrido un error inesperado')
     } finally {
       setSubmitting(false)
     }
@@ -63,29 +54,43 @@ function PlannerForm({
   return (
     <form
       onSubmit={handleSubmit}
-      className="space-y-4 rounded-xl border border-stone-800 bg-stone-900 p-5"
+      className="space-y-4 rounded-2xl border p-5"
+      style={{
+        backgroundColor: 'var(--color-surface)',
+        borderColor: 'var(--color-border)',
+      }}
     >
       <div>
-        <label className="mb-2 block text-sm font-medium text-stone-200">
+        <label className="mb-2 block text-sm font-medium" style={{ color: 'var(--color-text)' }}>
           Tarea
         </label>
         <input
           type="text"
           value={title}
           onChange={(event) => setTitle(event.target.value)}
-          className="w-full rounded-md border border-stone-700 bg-stone-950 px-3 py-2 text-stone-100 outline-none transition focus:border-emerald-500"
           placeholder="Ej. Plantar arándanos"
+          className="w-full rounded-lg border px-3 py-2 outline-none transition"
+          style={{
+            backgroundColor: 'var(--color-bg)',
+            borderColor: 'var(--color-border)',
+            color: 'var(--color-text)',
+          }}
         />
       </div>
 
       <div>
-        <label className="mb-2 block text-sm font-medium text-stone-200">
+        <label className="mb-2 block text-sm font-medium" style={{ color: 'var(--color-text)' }}>
           Estación
         </label>
         <select
           value={season}
           onChange={(event) => setSeason(event.target.value as Season)}
-          className="w-full rounded-md border border-stone-700 bg-stone-950 px-3 py-2 text-stone-100 outline-none transition focus:border-emerald-500"
+          className="w-full rounded-lg border px-3 py-2 outline-none transition"
+          style={{
+            backgroundColor: 'var(--color-bg)',
+            borderColor: 'var(--color-border)',
+            color: 'var(--color-text)',
+          }}
         >
           {SEASONS.map((seasonOption) => (
             <option key={seasonOption} value={seasonOption}>
@@ -96,7 +101,7 @@ function PlannerForm({
       </div>
 
       {initialItem && (
-        <label className="flex items-center gap-3 text-sm text-stone-200">
+        <label className="flex items-center gap-3 text-sm" style={{ color: 'var(--color-text)' }}>
           <input
             type="checkbox"
             checked={completed}
@@ -108,7 +113,14 @@ function PlannerForm({
       )}
 
       {error && (
-        <p className="rounded-md border border-red-900 bg-red-950/40 px-3 py-2 text-sm text-red-300">
+        <p
+          className="rounded-lg border px-3 py-2 text-sm"
+          style={{
+            backgroundColor: 'rgba(217, 123, 102, 0.15)',
+            borderColor: 'var(--color-danger)',
+            color: 'var(--color-danger)',
+          }}
+        >
           {error}
         </p>
       )}
@@ -117,20 +129,25 @@ function PlannerForm({
         <button
           type="submit"
           disabled={submitting}
-          className="rounded-md bg-emerald-500 px-4 py-2 font-medium text-stone-950 transition hover:opacity-90 disabled:opacity-60"
+          className="rounded-lg px-4 py-2 font-medium transition hover:opacity-90 disabled:opacity-60"
+          style={{
+            backgroundColor: 'var(--color-crop)',
+            color: 'var(--color-bg)',
+          }}
         >
-          {submitting
-            ? 'Guardando...'
-            : initialItem
-              ? 'Guardar cambios'
-              : 'Crear tarea'}
+          {submitting ? 'Guardando...' : initialItem ? 'Guardar cambios' : 'Crear tarea'}
         </button>
 
         {initialItem && onCancelEdit && (
           <button
             type="button"
             onClick={onCancelEdit}
-            className="rounded-md bg-stone-700 px-4 py-2 font-medium text-stone-100 transition hover:bg-stone-600"
+            className="rounded-lg px-4 py-2 font-medium transition hover:opacity-90"
+            style={{
+              backgroundColor: 'var(--color-bg-secondary)',
+              color: 'var(--color-text)',
+              border: '1px solid var(--color-border)',
+            }}
           >
             Cancelar edición
           </button>

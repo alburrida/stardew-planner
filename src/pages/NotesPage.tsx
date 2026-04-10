@@ -42,10 +42,24 @@ function NotesPage() {
 
   return (
     <section className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold">Notas</h1>
-        <p className="mt-2 text-stone-300">
-          Aquí puedes crear, editar y borrar notas personales de tu partida.
+      <div
+        className="rounded-3xl border p-6"
+        style={{
+          background: 'linear-gradient(135deg, var(--color-bg-secondary), var(--color-surface))',
+          borderColor: 'var(--color-border)',
+        }}
+      >
+        <p
+          className="text-sm font-semibold uppercase tracking-wide"
+          style={{ color: 'var(--color-villager)' }}
+        >
+          Organización
+        </p>
+        <h1 className="mt-2 text-3xl font-bold" style={{ color: 'var(--color-text)' }}>
+          Notas
+        </h1>
+        <p className="mt-2" style={{ color: 'var(--color-text-muted)' }}>
+          Guarda recordatorios, ideas y objetivos para tu partida.
         </p>
       </div>
 
@@ -54,6 +68,12 @@ function NotesPage() {
         onSubmit={editingNote ? handleUpdateNote : handleCreateNote}
         onCancelEdit={() => setEditingNote(null)}
       />
+
+      {!loading && !error && data && (
+        <p className="text-sm" style={{ color: 'var(--color-text-muted)' }}>
+          Total de notas: {data.length}
+        </p>
+      )}
 
       {loading && <LoadingState />}
       {error && <ErrorMessage message={error} onRetry={refetch} />}

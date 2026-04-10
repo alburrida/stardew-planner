@@ -5,14 +5,24 @@ interface ErrorMessageProps {
 
 function ErrorMessage({ message, onRetry }: ErrorMessageProps) {
   return (
-    <div className="rounded-xl border border-red-900 bg-red-950/40 p-4">
-      <p className="text-red-300">Error: {message}</p>
+    <div
+      className="rounded-xl border p-4"
+      style={{
+        backgroundColor: 'rgba(217, 123, 102, 0.15)',
+        borderColor: 'var(--color-danger)',
+      }}
+    >
+      <p style={{ color: 'var(--color-danger)' }}>Error: {message}</p>
 
       {onRetry && (
         <button
           type="button"
           onClick={onRetry}
-          className="mt-3 rounded-md bg-red-400 px-4 py-2 font-medium text-stone-950 transition hover:opacity-90"
+          className="mt-3 rounded-md px-4 py-2 font-medium transition hover:opacity-90"
+          style={{
+            backgroundColor: 'var(--color-danger)',
+            color: '#1F2A44',
+          }}
         >
           Reintentar
         </button>

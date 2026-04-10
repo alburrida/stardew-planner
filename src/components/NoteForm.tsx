@@ -35,7 +35,6 @@ function NoteForm({ initialNote, onSubmit, onCancelEdit }: NoteFormProps) {
     try {
       setSubmitting(true)
       setError(null)
-
       await onSubmit(title.trim(), content.trim())
 
       if (!initialNote) {
@@ -43,11 +42,7 @@ function NoteForm({ initialNote, onSubmit, onCancelEdit }: NoteFormProps) {
         setContent('')
       }
     } catch (err) {
-      if (err instanceof Error) {
-        setError(err.message)
-      } else {
-        setError('Ha ocurrido un error inesperado')
-      }
+      setError(err instanceof Error ? err.message : 'Ha ocurrido un error inesperado')
     } finally {
       setSubmitting(false)
     }
@@ -56,36 +51,57 @@ function NoteForm({ initialNote, onSubmit, onCancelEdit }: NoteFormProps) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="space-y-4 rounded-xl border border-stone-800 bg-stone-900 p-5"
+      className="space-y-4 rounded-2xl border p-5"
+      style={{
+        backgroundColor: 'var(--color-surface)',
+        borderColor: 'var(--color-border)',
+      }}
     >
       <div>
-        <label className="mb-2 block text-sm font-medium text-stone-200">
+        <label className="mb-2 block text-sm font-medium" style={{ color: 'var(--color-text)' }}>
           Título
         </label>
         <input
           type="text"
           value={title}
           onChange={(event) => setTitle(event.target.value)}
-          className="w-full rounded-md border border-stone-700 bg-stone-950 px-3 py-2 text-stone-100 outline-none transition focus:border-emerald-500"
           placeholder="Ej. Cultivos para verano"
+          className="w-full rounded-lg border px-3 py-2 outline-none transition"
+          style={{
+            backgroundColor: 'var(--color-bg)',
+            borderColor: 'var(--color-border)',
+            color: 'var(--color-text)',
+          }}
         />
       </div>
 
       <div>
-        <label className="mb-2 block text-sm font-medium text-stone-200">
+        <label className="mb-2 block text-sm font-medium" style={{ color: 'var(--color-text)' }}>
           Contenido
         </label>
         <textarea
           value={content}
           onChange={(event) => setContent(event.target.value)}
           rows={5}
-          className="w-full rounded-md border border-stone-700 bg-stone-950 px-3 py-2 text-stone-100 outline-none transition focus:border-emerald-500"
           placeholder="Escribe aquí tu nota..."
+          className="w-full rounded-lg border px-3 py-2 outline-none transition"
+          style={{
+            backgroundColor: 'var(--color-bg)',
+            borderColor: 'var(--color-border)',
+            color: 'var(--color-text)',
+          }}
         />
       </div>
 
       {error && (
-        <p className="rounded-md border border-red-900 bg-red-950/40 px-3 py-2 text-sm text-red-300">
+        <p
+          className="rounded-lg border px-3 py-2 text-sm"
+          style={{
+            backgroundColor: 'rgba(217, 123, 102, 0.15)',
+            borderColor: 'var(--color-danger)',
+            color: 'var(--color-danger)',
+          }}
+        >
           {error}
         </p>
       )}
@@ -94,20 +110,25 @@ function NoteForm({ initialNote, onSubmit, onCancelEdit }: NoteFormProps) {
         <button
           type="submit"
           disabled={submitting}
-          className="rounded-md bg-emerald-500 px-4 py-2 font-medium text-stone-950 transition hover:opacity-90 disabled:opacity-60"
+          className="rounded-lg px-4 py-2 font-medium transition hover:opacity-90 disabled:opacity-60"
+          style={{
+            backgroundColor: 'var(--color-crop)',
+            color: 'var(--color-bg)',
+          }}
         >
-          {submitting
-            ? 'Guardando...'
-            : initialNote
-              ? 'Guardar cambios'
-              : 'Crear nota'}
+          {submitting ? 'Guardando...' : initialNote ? 'Guardar cambios' : 'Crear nota'}
         </button>
 
         {initialNote && onCancelEdit && (
           <button
             type="button"
             onClick={onCancelEdit}
-            className="rounded-md bg-stone-700 px-4 py-2 font-medium text-stone-100 transition hover:bg-stone-600"
+            className="rounded-lg px-4 py-2 font-medium transition hover:opacity-90"
+            style={{
+              backgroundColor: 'var(--color-bg-secondary)',
+              color: 'var(--color-text)',
+              border: '1px solid var(--color-border)',
+            }}
           >
             Cancelar edición
           </button>

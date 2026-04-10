@@ -4,8 +4,14 @@ interface EmptyStateProps {
 
 function EmptyState({ message }: EmptyStateProps) {
   return (
-    <div className="rounded-xl border border-stone-800 bg-stone-900 p-4">
-      <p className="text-stone-400">{message}</p>
+    <div
+      className="rounded-xl border p-4"
+      style={{
+        backgroundColor: 'var(--color-surface)',
+        borderColor: 'var(--color-border)',
+      }}
+    >
+      <p style={{ color: 'var(--color-text-muted)' }}>{message}</p>
     </div>
   )
 }

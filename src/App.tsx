@@ -11,7 +11,7 @@ import NotFoundPage from './pages/NotFoundPage'
 
 function App() {
   return (
-    <div className="min-h-screen bg-stone-950 text-stone-100">
+    <div className="min-h-screen" style={{ backgroundColor: 'var(--color-bg)', color: 'var(--color-text)' }}>
       <Navbar />
 
       <main className="mx-auto max-w-6xl px-6 py-8">

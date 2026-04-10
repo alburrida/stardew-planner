@@ -24,8 +24,7 @@ function FishPage() {
         fish.name.toLowerCase().includes(normalizedSearch) ||
         fish.location.toLowerCase().includes(normalizedSearch)
 
-      const matchesSeason =
-        season === '' || fish.season.includes(season)
+      const matchesSeason = season === '' || fish.season.includes(season)
 
       return matchesSearch && matchesSeason
     })
@@ -33,10 +32,24 @@ function FishPage() {
 
   return (
     <section className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold">Peces</h1>
-        <p className="mt-2 text-stone-300">
-          Listado de peces con ubicación, horario y clima.
+      <div
+        className="rounded-3xl border p-6"
+        style={{
+          background: 'linear-gradient(135deg, var(--color-bg-secondary), var(--color-surface))',
+          borderColor: 'var(--color-border)',
+        }}
+      >
+        <p
+          className="text-sm font-semibold uppercase tracking-wide"
+          style={{ color: 'var(--color-fish)' }}
+        >
+          Colección
+        </p>
+        <h1 className="mt-2 text-3xl font-bold" style={{ color: 'var(--color-text)' }}>
+          Peces
+        </h1>
+        <p className="mt-2" style={{ color: 'var(--color-text-muted)' }}>
+          Filtra por estación, ubicación y horario para encontrar cada pez.
         </p>
       </div>
 
@@ -48,6 +61,12 @@ function FishPage() {
         />
         <SeasonFilter value={season} onChange={setSeason} />
       </div>
+
+      {!loading && !error && (
+        <p className="text-sm" style={{ color: 'var(--color-text-muted)' }}>
+          Resultados: {filteredFish.length}
+        </p>
+      )}
 
       {loading && <LoadingState />}
       {error && <ErrorMessage message={error} onRetry={refetch} />}

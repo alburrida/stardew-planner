@@ -51,12 +51,7 @@ function PlannerPage() {
   }
 
   async function handleToggleCompleted(item: PlannerItem) {
-    await updatePlannerItem(
-      item.id,
-      item.title,
-      item.season,
-      !item.completed,
-    )
+    await updatePlannerItem(item.id, item.title, item.season, !item.completed)
     await refetch()
   }
 
@@ -70,10 +65,24 @@ function PlannerPage() {
 
   return (
     <section className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold">Planner</h1>
-        <p className="mt-2 text-stone-300">
-          Aquí puedes organizar tareas y objetivos por estación.
+      <div
+        className="rounded-3xl border p-6"
+        style={{
+          background: 'linear-gradient(135deg, var(--color-bg-secondary), var(--color-surface))',
+          borderColor: 'var(--color-border)',
+        }}
+      >
+        <p
+          className="text-sm font-semibold uppercase tracking-wide"
+          style={{ color: 'var(--color-crop)' }}
+        >
+          Organización
+        </p>
+        <h1 className="mt-2 text-3xl font-bold" style={{ color: 'var(--color-text)' }}>
+          Planner
+        </h1>
+        <p className="mt-2" style={{ color: 'var(--color-text-muted)' }}>
+          Organiza tareas y objetivos por estación.
         </p>
       </div>
 
@@ -84,6 +93,12 @@ function PlannerPage() {
       />
 
       <SeasonFilter value={seasonFilter} onChange={setSeasonFilter} />
+
+      {!loading && !error && (
+        <p className="text-sm" style={{ color: 'var(--color-text-muted)' }}>
+          Resultados: {filteredItems.length}
+        </p>
+      )}
 
       {loading && <LoadingState />}
       {error && <ErrorMessage message={error} onRetry={refetch} />}

@@ -1,4 +1,5 @@
 import FavoriteButton from './FavoriteButton'
+import { SEASON_LABELS } from '../utils/seasons'
 import type { Crop } from '../types/stardew'
 
 interface CropCardProps {
@@ -7,27 +8,46 @@ interface CropCardProps {
 
 function CropCard({ crop }: CropCardProps) {
   return (
-    <article className="rounded-xl border border-stone-800 bg-stone-900 p-4">
+    <article
+      className="rounded-2xl border p-5 shadow-sm transition hover:-translate-y-0.5"
+      style={{
+        backgroundColor: 'var(--color-surface)',
+        borderColor: 'var(--color-border)',
+      }}
+    >
       <div className="flex items-start justify-between gap-3">
-        <h2 className="text-xl font-semibold text-emerald-400">{crop.name}</h2>
+        <h2
+          className="text-xl font-semibold"
+          style={{ color: 'var(--color-crop)' }}
+        >
+          {crop.name}
+        </h2>
         <FavoriteButton itemId={crop.id} type="crop" />
       </div>
 
-      <div className="mt-3 space-y-2 text-sm text-stone-300">
+      <div className="mt-4 space-y-2 text-sm" style={{ color: 'var(--color-text-muted)' }}>
         <p>
-          <span className="font-medium text-stone-100">Estación:</span>{' '}
-          {crop.season.join(', ')}
+          <span className="font-medium" style={{ color: 'var(--color-text)' }}>
+            Estación:
+          </span>{' '}
+          {crop.season.map((season) => SEASON_LABELS[season]).join(', ')}
         </p>
         <p>
-          <span className="font-medium text-stone-100">Días de crecimiento:</span>{' '}
+          <span className="font-medium" style={{ color: 'var(--color-text)' }}>
+            Días de crecimiento:
+          </span>{' '}
           {crop.growthDays}
         </p>
         <p>
-          <span className="font-medium text-stone-100">Precio de venta:</span>{' '}
+          <span className="font-medium" style={{ color: 'var(--color-text)' }}>
+            Precio de venta:
+          </span>{' '}
           {crop.sellPrice}g
         </p>
         <p>
-          <span className="font-medium text-stone-100">Regrowth:</span>{' '}
+          <span className="font-medium" style={{ color: 'var(--color-text)' }}>
+            Regrowth:
+          </span>{' '}
           {crop.regrowthDays ? `${crop.regrowthDays} días` : 'No'}
         </p>
       </div>

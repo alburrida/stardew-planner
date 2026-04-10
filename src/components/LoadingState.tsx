@@ -1,7 +1,13 @@
 function LoadingState() {
   return (
-    <div className="rounded-xl border border-stone-800 bg-stone-900 p-4">
-      <p className="text-stone-300">Cargando datos...</p>
+    <div
+      className="rounded-xl border p-4"
+      style={{
+        backgroundColor: 'var(--color-surface)',
+        borderColor: 'var(--color-border)',
+      }}
+    >
+      <p style={{ color: 'var(--color-text-muted)' }}>Cargando datos...</p>
     </div>
   )
 }

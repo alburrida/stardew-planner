@@ -40,12 +40,7 @@ function FavoritesPage() {
       fishState.refetch(),
       villagersState.refetch(),
     ])
-  }, [
-    refetchFavorites,
-    cropsState,
-    fishState,
-    villagersState,
-  ])
+  }, [refetchFavorites, cropsState, fishState, villagersState])
 
   const favoriteItems = useMemo(() => {
     const crops = cropsState.data
@@ -87,9 +82,25 @@ function FavoritesPage() {
   if (loading) {
     return (
       <section className="space-y-6">
-        <div>
-          <h1 className="text-3xl font-bold">Favoritos</h1>
-          <p className="mt-2 text-stone-300">Tus elementos guardados.</p>
+        <div
+          className="rounded-3xl border p-6"
+          style={{
+            background: 'linear-gradient(135deg, var(--color-bg-secondary), var(--color-surface))',
+            borderColor: 'var(--color-border)',
+          }}
+        >
+          <p
+            className="text-sm font-semibold uppercase tracking-wide"
+            style={{ color: 'var(--color-earth)' }}
+          >
+            Colección personal
+          </p>
+          <h1 className="mt-2 text-3xl font-bold" style={{ color: 'var(--color-text)' }}>
+            Favoritos
+          </h1>
+          <p className="mt-2" style={{ color: 'var(--color-text-muted)' }}>
+            Tus elementos guardados para acceso rápido.
+          </p>
         </div>
 
         <LoadingState />
@@ -100,9 +111,25 @@ function FavoritesPage() {
   if (error) {
     return (
       <section className="space-y-6">
-        <div>
-          <h1 className="text-3xl font-bold">Favoritos</h1>
-          <p className="mt-2 text-stone-300">Tus elementos guardados.</p>
+        <div
+          className="rounded-3xl border p-6"
+          style={{
+            background: 'linear-gradient(135deg, var(--color-bg-secondary), var(--color-surface))',
+            borderColor: 'var(--color-border)',
+          }}
+        >
+          <p
+            className="text-sm font-semibold uppercase tracking-wide"
+            style={{ color: 'var(--color-earth)' }}
+          >
+            Colección personal
+          </p>
+          <h1 className="mt-2 text-3xl font-bold" style={{ color: 'var(--color-text)' }}>
+            Favoritos
+          </h1>
+          <p className="mt-2" style={{ color: 'var(--color-text-muted)' }}>
+            Tus elementos guardados para acceso rápido.
+          </p>
         </div>
 
         <ErrorMessage message={error} onRetry={() => void handleRetry()} />
@@ -112,12 +139,30 @@ function FavoritesPage() {
 
   return (
     <section className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold">Favoritos</h1>
-        <p className="mt-2 text-stone-300">
+      <div
+        className="rounded-3xl border p-6"
+        style={{
+          background: 'linear-gradient(135deg, var(--color-bg-secondary), var(--color-surface))',
+          borderColor: 'var(--color-border)',
+        }}
+      >
+        <p
+          className="text-sm font-semibold uppercase tracking-wide"
+          style={{ color: 'var(--color-earth)' }}
+        >
+          Colección personal
+        </p>
+        <h1 className="mt-2 text-3xl font-bold" style={{ color: 'var(--color-text)' }}>
+          Favoritos
+        </h1>
+        <p className="mt-2" style={{ color: 'var(--color-text-muted)' }}>
           Aquí se muestran cultivos, peces y aldeanos guardados por el usuario.
         </p>
       </div>
+
+      <p className="text-sm" style={{ color: 'var(--color-text-muted)' }}>
+        Total guardados: {favoriteItems.length}
+      </p>
 
       {favoriteItems.length === 0 ? (
         <EmptyState message="Todavía no has añadido elementos a favoritos." />
@@ -132,12 +177,7 @@ function FavoritesPage() {
               return <FishCard key={favorite.item.id} fish={favorite.item} />
             }
 
-            return (
-              <VillagerCard
-                key={favorite.item.id}
-                villager={favorite.item}
-              />
-            )
+            return <VillagerCard key={favorite.item.id} villager={favorite.item} />
           })}
         </div>
       )}
